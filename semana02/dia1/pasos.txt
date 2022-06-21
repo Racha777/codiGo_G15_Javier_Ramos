@@ -1,0 +1,6 @@
+PASOS PARA TU PRIMER APP CON FLASK
+1 - python -m venv venv
+2 - source venv/scripts/activate
+3 - pip install flask
+4 - python web.py
+5 - ingresar a http://localhost:5000/
