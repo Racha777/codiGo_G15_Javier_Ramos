@@ -11,8 +11,16 @@
     <title>Ejemplo de manejo de plantillas con flask</title>
   </head>
   <body>
-    <h1>Hola {{nombre}}</h1>
-
+    {%if nombre!="nn"%}
+        <h1>{{nombre}}</h1>
+    {%else%}
+        <h1>Relacion de peliculas</h1>
+    {%endif%}
+    <ul class="lisy-group">
+        {%for pelicula in peliculas %}
+            <li class="list-group-item">{{pelicula}}</li>
+        {%endfor%}
+    </ul>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
