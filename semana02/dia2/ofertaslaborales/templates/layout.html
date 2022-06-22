@@ -12,8 +12,10 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-dark">
-        <div class="container-md">
-          <a class="navbar-brand" href="#">Navbar</a>
+        <div class="container'-md'">
+            {%for menu in menus%}
+                <a class="navbar-brand" href="/{{menu}}">{{menu}}</a>
+            {%endfor%}
         </div>
     </nav>
     <div class="container">
