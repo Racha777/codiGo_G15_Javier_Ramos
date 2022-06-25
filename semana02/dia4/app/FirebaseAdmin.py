@@ -14,6 +14,23 @@ class FirebaseAdmin:
         docValues=collectionValues.get()
         for doc in docValues:
             dicCollection=doc.to_dict()
+            dicCollection.update({'id':doc.id})#obtener los Id de los proyectos
             lstCollection.append(dicCollection)
 
         return lstCollection
+
+    def getDocument(self,collectionName,documentId):
+        docValue=self.db.collection(collectionName).document(documentId).get()
+        return docValue.to_dict()
+
+    def updateDocument(self,collectionName,documentId,data):
+        docValue=self.db.collection(collectionName).document(documentId).set(data)
+        return docValue
+
+    def insertDocument(self,collectionName,data):
+        docValue=self.db.collection(collectionName).document().set(data)
+        return docValue
+
+    def deleteDocument(self,collectionName,documentId):
+        self.db.collection(collectionName).document(documentId).delete()
+        return True
