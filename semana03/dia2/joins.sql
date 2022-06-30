@@ -44,3 +44,42 @@ LEFT join nota n4 on n4.alumno_id = a.id and n4.curso_id = 4
 LEFT join nota n5 on n5.alumno_id = a.id and n5.curso_id = 5
 LEFT join nota n6 on n6.alumno_id = a.id and n6.curso_id = 6
 GROUP BY a.nombre,n1.nota,n2.nota,n3.nota,n4.nota,n5.nota,n6.nota;
+
+--ejemplos
+select nota.*,alumno.*
+from nota
+inner join alumno on nota.alumno_id=alumno.id;
+
+select
+nota.id as id,
+alumno.nombre as alumno,
+curso.nombre as curso,
+nota.nota as nota
+from nota
+inner join alumno on nota.alumno_id=alumno.id
+inner join curso on nota.curso_id=curso.id
+ORDER BY alumno.nombre asc;
+
+select a.nombre,AVG(n.nota) as nota
+from alumno a
+left JOIN nota n on a.id=n.alumno_id
+GROUP BY a.nombre;
+
+--mostrar en un istado la relacion de alumnos y sus notas por curso en cada columna, mas su promedio al final
+select a.nombre as alumno,
+n1.nota as HTML,
+n2.nota as JAVASCRIPT,
+n3.nota as REACT,
+n4.nota as PYTHON,
+n5.nota as FLASK,
+n6.nota as MYSQL,
+avg(n.nota) as PROMEDIO
+from alumno a
+left join nota n on n.alumno_id=a.id
+left join nota n1 on n1.alumno_id=a.id and n1.curso_id=1
+left join nota n2 on n2.alumno_id=a.id and n2.curso_id=2
+left join nota n3 on n3.alumno_id=a.id and n3.curso_id=3
+left join nota n4 on n4.alumno_id=a.id and n4.curso_id=4
+left join nota n5 on n5.alumno_id=a.id and n5.curso_id=5
+left join nota n6 on n6.alumno_id=a.id and n6.curso_id=6
+GROUP BY a.nombre,n1.nota,n2.nota,n3.nota,n4.nota,n5.nota,n6.nota;
