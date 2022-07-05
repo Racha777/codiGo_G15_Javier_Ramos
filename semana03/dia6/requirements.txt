@@ -1,0 +1,6 @@
+Flask #flask : microframework web
+Flask-SQLAlchemy #extensión de ORM Sqlalchemy para python
+flask-marshmallow # permite crear modelos para el orm y serializaciones
+marshmallow-sqlalchemy #conecta los modelos de marschmallow con sqlalchemy
+mysqlclient # libreria para conectar sqlalchemy con mysql
+python-dotenv # permite utilizar variables de entorno
