@@ -4,24 +4,26 @@
             <i class="ion-android-cart"></i>
             <span>3</span>
         </p>
-        <p class="h-cart-total">$510.00</p>
+        <p class="h-cart-total">${{request.session.cartMontoTotal}}</p>
     </a>
     <div class="widget_shopping_cart">
         <div class="widget_shopping_cart_content">
             <ul class="cart_list">
+                {% for key,value in request.session.cart.items %}
                 <li>
-                    <a href="#" class="remove">&times;</a>
+                    <a href="{%url 'web:eliminarProductoCarrito' value.producto_id%}" class="remove">&times;</a>
                     <a href="#">
-                        <img src="" alt="">
-                        Pneumatic Coil Hose
+                        <img src="{{value.imagen}}" alt="">
+                        {{value.nombre}}
                     </a>
-                    <span class="quantity">1 &times; $180.00</span>
+                    <span class="quantity">{{value.cantidad}} &times; ${{value.precio}}</span>
                 </li>
+                {%endfor%}
             </ul>
-            <p class="total"><b>Subtotal:</b> $510.00</p>
+            <p class="total"><b>Subtotal:</b> ${{request.session.cartMontoTotal}}</p>
             <p class="buttons">
-                <a href="cart.html" class="button">View cart</a>
-                <a href="checkout.html" class="button">Checkout</a>
+                <a href="/carrito" class="button">Ver carrito</a>
+                <a href="#" class="button">Comprar</a>
             </p>
         </div>
     </div>

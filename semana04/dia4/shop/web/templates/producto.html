@@ -56,31 +56,28 @@
                     Vestibulum tortor quam, feugiat vitae, ultricies eget... 
                     <a id="prod-showdesc" class="prod-excerpt-more" href="#">read more</a></p>
                 <div class="prod-add">
-                    <div class="variations">
-                        <div class="variations-row">
-                            <div class="label"><label >Сolor</label></div>
-                            <div class="value">
-                                <select>
-                                    <option value="">Choose an option</option>
-                                    <option value="blue">Blue</option>
-                                    <option value="green">Green</option>
-                                    <option value="yellow">Yellow</option>
-                                </select>
+                    <form action="{%url 'web:agregarCarrito' producto.id%}" method="post">
+                        {%csrf_token%}
+                        <div class="variations">
+                            <div class="variations-row">
+                                <div class="label"><label >Сolor</label></div>
+                                <div class="value">
+                                    <select>
+                                        <option value="">Choose an option</option>
+                                        <option value="blue">Blue</option>
+                                        <option value="green">Green</option>
+                                        <option value="yellow">Yellow</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <button type="submit" class="button"><i class="icon ion-android-cart"></i> Add to cart</button>
-                    <p class="qnt-wrap prod-li-qnt">
-                        <a href="#" class="qnt-plus prod-li-plus"><i class="icon ion-arrow-up-b"></i></a>
-                        <input type="text" value="1">
-                        <a href="#" class="qnt-minus prod-li-minus"><i class="icon ion-arrow-down-b"></i></a>
-                    </p>
-                    <div class="prod-li-favorites">
-                        <a href="wishlist.html" class="hover-label add_to_wishlist"><i class="icon ion-heart"></i><span>Add to Wishlist</span></a>
-                    </div>
-                    <p class="prod-li-compare">
-                        <a href="compare.html" class="hover-label prod-li-compare-btn"><span>Compare</span><i class="icon ion-arrow-swap"></i></a>
-                    </p>
+                        <button type="submit" class="button"><i class="icon ion-android-cart"></i>Agregar al Carrito</button>
+                        <p class="qnt-wrap prod-li-qnt">
+                            <a href="#" class="qnt-plus prod-li-plus"><i class="icon ion-arrow-up-b"></i></a>
+                            <input type="text" name="cantidad" value="1">
+                            <a href="#" class="qnt-minus prod-li-minus"><i class="icon ion-arrow-down-b"></i></a>
+                        </p>
+                    </form>
                 </div>
             </div>
             <div class="prod-props">
