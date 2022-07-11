@@ -43,6 +43,7 @@ class Cart:
 
     def clear(self):
         self.session["cart"]={}
+        self.session["cartMontoTotal"]="0"
 
     def save(self):
         montoTotal=0

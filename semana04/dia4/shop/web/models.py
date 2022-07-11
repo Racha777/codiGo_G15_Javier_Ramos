@@ -43,3 +43,21 @@ class Cliente(models.Model):
 
     def __str__(self):
         return self.dni
+
+class Pedido(models.Model):
+    cliente=models.ForeignKey(Cliente,on_delete=models.RESTRICT)
+    fecha_registro=models.DateTimeField(auto_now=True)
+    nro_pedido=models.CharField(max_length=20,null=True)
+    monto_total=models.DecimalField(max_digits=10,decimal_places=2,default=0)
+    
+    def __str__(self):
+        return self.nro_pedido
+
+class PedidoDetalle(models.Model):
+    pedido=models.ForeignKey(Pedido,on_delete=models.RESTRICT)
+    producto=models.ForeignKey(Producto,on_delete=models.RESTRICT)
+    cantidad=models.IntegerField(default=1)
+    subtotal=models.DecimalField(max_digits=10,decimal_places=2)
+
+    def __str__(self):
+        return self.producto.nombre

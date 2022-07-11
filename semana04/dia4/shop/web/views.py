@@ -1,8 +1,18 @@
 from django.shortcuts import render,redirect
 
-from .models import Categoria,Marca,Producto
+from .models import (
+    Categoria,
+    Cliente,
+    Marca,
+    Producto,
+    Cliente,
+    Pedido,
+    PedidoDetalle
+)
 
 from .carrito import Cart
+
+from .forms import ClienteForm
 
 # Create your views here.
 def index(request):
@@ -71,10 +81,14 @@ def agregarCarrito(request,producto_id):
         cantidad=int(request.POST['cantidad'])
     else:
         cantidad=1
+    
     objProducto=Producto.objects.get(pk=producto_id)
     carritoProducto=Cart(request)
     carritoProducto.add(objProducto,cantidad)
-    print(request.session.get("cart"))
+    #print(request.session.get("cart"))
+
+    if request.method=='GET':
+        return redirect("/")
 
     return render(request,'carrito.html')
 
@@ -131,5 +145,111 @@ def logoutUsuario(request):
     return render(request,'login.html')
 
 def cuentaUsuario(request):
-    context={}
+    try:
+        clienteEditar=Cliente.objects.get(usuario=request.user)
+        dataCliente={
+            'nombre':request.user.first_name,
+            'apellidos':request.user.last_name,
+            'email':request.user.email,
+            'direccion':clienteEditar.direccion,
+            'telefono':clienteEditar.telefono,
+            'dni':clienteEditar.dni,
+            'sexo':clienteEditar.sexo,
+            'fecha_nacimiento':clienteEditar.fecha_nacimiento
+        }
+    except:
+        dataCliente={
+            'nombre':request.user.first_name,
+            'apellidos':request.user.last_name,
+            'email':request.user.email,
+        }
+
+    frmCliente=ClienteForm(dataCliente)
+
+    context={
+        'frmCliente':frmCliente
+    }
     return render(request,'cuenta.html',context)
+
+def actualizarCliente(request):
+    mensaje=""
+    if request.method=='POST':
+        frmCliente=ClienteForm(request.POST)
+        if frmCliente.is_valid():
+            dataCliente=frmCliente.cleaned_data
+            
+            #Actualizar usuario
+            actUsuario=User.objects.get(pk=request.user.id)
+            actUsuario.first_name=dataCliente["nombre"]
+            actUsuario.last_name=dataCliente["apellidos"]
+            actUsuario.email=dataCliente["email"]
+            actUsuario.save()
+
+            try:
+                actCliente=Cliente.objects.get(usuario=request.user)
+                actCliente.dni=dataCliente["dni"]
+                actCliente.direccion=dataCliente["direccion"]
+                actCliente.telefono=dataCliente["telefono"]
+                actCliente.sexo=dataCliente["sexo"]
+                actCliente.fecha_nacimiento=dataCliente["fecha_nacimiento"]
+                actCliente.save()
+            except:
+                nuevoCliente=Cliente()
+                nuevoCliente.usuario=actUsuario
+                nuevoCliente.dni=dataCliente["dni"]
+                nuevoCliente.direccion=dataCliente["direccion"]
+                nuevoCliente.telefono=dataCliente["telefono"]
+                nuevoCliente.sexo=dataCliente["sexo"]
+                nuevoCliente.fecha_nacimiento=dataCliente["fecha_nacimiento"]
+                nuevoCliente.save()
+            mensaje="Datos Actualizados"
+        else:
+            mensaje="Error al actualizar los datos"
+
+
+    context={
+        'frmCliente':frmCliente,
+        'mensaje':mensaje
+    }
+
+    return render(request,'cuenta.html',context)
+
+#################### PEDIDOS ####################
+def registrarPedido(request):
+    if request.user.id is not None:
+        nroPedido=''
+        montoTotal=0
+        #registrar cabecera
+        clientePedido=Cliente.objects.get(usuario=request.user)
+        nuevoPedido=Pedido()
+        nuevoPedido.cliente=clientePedido
+        nuevoPedido.save()
+
+        #registrar pedido
+        carritoPedido=request.session.get('cart')
+        for key,value in carritoPedido.items():
+            productoPedido=Producto.objects.get(pk=value["producto_id"])
+
+            nuevoPedidoDetalle=PedidoDetalle()
+            nuevoPedidoDetalle.pedido=nuevoPedido
+            nuevoPedidoDetalle.producto=productoPedido
+            nuevoPedidoDetalle.cantidad=int(value['cantidad'])
+            nuevoPedidoDetalle.subtotal=float(value['subtotal'])
+            nuevoPedidoDetalle.save()
+            montoTotal+=float(value['subtotal'])
+        
+        carrito=Cart(request)
+        carrito.clear()
+        #Actualizar el nro de pedido y el monto
+        nroPedido='PED'+nuevoPedido.fecha_registro.strftime('%Y')+str(nuevoPedido.id)
+        nuevoPedido.nro_pedido=nroPedido
+        nuevoPedido.monto_total=montoTotal
+        nuevoPedido.save()
+
+        context={
+            'pedido':nuevoPedido
+        }
+
+        return render(request,'pedido.html',context)
+    else:
+        return redirect('/login')

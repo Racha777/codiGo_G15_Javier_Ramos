@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'web',
+    'crispy_forms',
     'django_admin_tailwind',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -131,3 +132,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 import os
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 MEDIA_URL='/media/'
+
+CRISPY_TEMPLATE_PACK='bootstrap4'
