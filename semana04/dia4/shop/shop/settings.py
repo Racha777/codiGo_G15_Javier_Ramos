@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'web',
+    'api',
+    'rest_framework',
     'crispy_forms',
     'django_admin_tailwind',
     'django.contrib.admin',
