@@ -1,21 +1,28 @@
-from urllib import response
 from rest_framework.views import APIView
 from rest_framework.response import Response
+
+from rest_framework.permissions import IsAuthenticated
 
 from . models import(
     Mesa,
     Categoria,
-    Plato
+    Plato,
+    Pedido
 )
 
 from .serializers import(
     MesaSerializer,
     CategoriaSerializer,
     PlatoSerializer,
-    CategoriaPlatosSerializer
+    CategoriaPlatosSerializer,
+    PedidoSerializerPOST,
+    PedidoSerializerGET
 )
 
 class IndexView(APIView):
+
+    permission_classes=[IsAuthenticated]
+
     def get(self,request):
         context={
             'ok':True,
@@ -82,4 +89,28 @@ class CategoriaPlatosView(APIView):
             'content':serializerData.data
         }
 
+        return Response(context)
+
+class PedidoView(APIView):
+    def get(self,request):
+        data=Pedido.objects.all()
+        serializerData=PedidoSerializerGET(data,many=True)
+
+        context={
+            'ok':True,
+            'content':serializerData.data
+        }
+
+        return Response(context)
+
+    def post(self,request):
+        serializerData=PedidoSerializerPOST(data=request.data)
+        serializerData.is_valid(raise_exception=True)
+        serializerData.save()
+
+        context={
+            'ok':True,
+            'content':serializerData.data
+        }
+    
         return Response(context)

@@ -2,6 +2,7 @@ from email.policy import default
 from django.db import models
 
 from cloudinary.models import CloudinaryField
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Mesa(models.Model):
@@ -37,3 +38,36 @@ class Plato(models.Model):
 
     def __str__(self):
         return self.plato_nom
+
+class Pedido(models.Model):
+
+    ESTADO_CHOICES=(
+        ('solicitado','Solicitado'),
+        ('entregado', 'entregado')
+    )
+
+    pedido_id=models.AutoField(primary_key=True)
+    pedido_fecha=models.DateTimeField(null=True,verbose_name='Fecha')
+    pedido_nro=models.CharField(max_length=100, default='',verbose_name='Nro Pedido')
+    pedido_est=models.CharField(max_length=100,default='solicitado',choices=ESTADO_CHOICES,verbose_name='Estado')
+    mesa_id=models.ForeignKey(Mesa,to_field='mesa_id',on_delete=models.RESTRICT,db_column='mesa_id',verbose_name='Nro Mesa')
+    usu_id=models.ForeignKey(User,to_field='id',related_name='Pedidos',on_delete=models.RESTRICT,db_column='usu_id',verbose_name='Usuario')
+
+    class Meta:
+        db_table='tbl_pedido'
+
+    def __str__(self):
+        return self.pedido_nro
+
+class PedidoPlato(models.Model):
+    pedidoplato_id=models.AutoField(primary_key=True)
+    pedidoplato_cant=models.IntegerField(default=1,verbose_name='Cantidad')
+    plato_id=models.ForeignKey(Plato,related_name='pedidoplatos',to_field='plato_id',on_delete=models.RESTRICT,db_column='plato_id',verbose_name='Plato')
+    pedido_id=models.ForeignKey(Pedido,related_name='pedidoplatos',to_field='pedido_id',on_delete=models.RESTRICT,db_column='pedido_id',verbose_name='Pedido')
+
+    class Meta:
+        db_table='tbl_pedido_plato'
+
+    def __str__(self):
+        return str(self.plato_id)
+    

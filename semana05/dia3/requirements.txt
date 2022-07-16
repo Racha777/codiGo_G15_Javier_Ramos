@@ -4,3 +4,4 @@ django-cors-headers
 mysqlclient
 cloudinary
 python-decouple
+djangorestframework-simplejwt

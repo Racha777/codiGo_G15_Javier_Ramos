@@ -7,7 +7,7 @@ export const postPagarPedido = async (objPedido, mesaId) => {
 	let objPedidoBackend = {
 		usu_id: 1,
 		mesa_id: mesaId,
-		pedido_est: 'pagado',
+		pedido_est: 'solicitado',
 		pedido_nro: uuidv4(),
 		pedido_fech: format(new Date(), 'yyyy-MM-dd hh:mm:ss'),
 		pedidoplatos: objPedido.platos.map((objPlatoPedido) => {

@@ -8,4 +8,5 @@ urlpatterns=[
     path('plato/',views.PlatoView.as_view()),
     path('categoria/<int:categoria_id>',views.CategoriaDetail.as_view()),
     path('categoria/<int:categoria_id>/platos',views.CategoriaPlatosView.as_view()),
+    path('pedido',views.PedidoView.as_view())
 ]
