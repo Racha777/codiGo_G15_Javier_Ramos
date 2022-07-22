@@ -1,0 +1,14 @@
+1) mongo: Inicia mongo db shell
+2) show dbs:Muestra las bases de datos
+3) use cursos: Crea la db cursos
+4) db.alumnos.insertOne(): inserta un registro en la coleccion alumnos
+5) show collections: muestra las colecciones de la db
+6)db.alumnos.find(): muestra todos los documentos (registros) de la coleccion alumnos
+7) db.alumnos.insertMany()
+
+Operaciones Crud
+actualizar
+db.alumnos.updateOne({filtro},{datos a actualizar})
+
+eliminar
+db.alumnos.deleteOne({filtro})
