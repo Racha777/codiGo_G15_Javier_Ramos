@@ -1,0 +1,9 @@
+django
+Pillow
+mysqlclient
+django-admin-tailwind
+django-crispy-forms
+djangorestframework
+python-dotenv
+cloudinary
+django-paypal
