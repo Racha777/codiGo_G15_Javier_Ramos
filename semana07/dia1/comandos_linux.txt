@@ -1,0 +1,51 @@
+sudo -- para ejecutar cualquier comando con privilegios de administradofa-rotate-180
+
+1-Actualizamos ubuntu
+sudo apt update
+nota: Pedira el password del administrador que es igual al password del usuario codigo
+
+2-conexion por SSH
+abrir terminal de gitbash
+ejecutar ssh codigo@direccion_ip_del_servidor
+
+3-Instalamos servidor web con nginx
+sudo apt install ngnix
+
+verificamos ingresando con el navegador a la direccion ip del servidor
+192.168.1.9
+NOTA: si se cambia la direccion IP y quieres ver cual es la nueva
+sudo apt install net-tools
+ifconfig
+
+Comandos para ver estado y reiniciar el servidor
+
+sudo systemctl status nginx : permite ver el estado del servidor
+sudo systemctl stop nginx : detiene el servidor
+sudo systemctl start nginx : inicia el servidor
+sudo systemctl restart nginx : reinicia el servidor
+
+sudo init 0 : Comando superpoderoso para apagar el servidor
+
+Creamos nuestra primera pagina web
+1- ingresamos a la carpeta html
+cd/var/www/html
+
+2- ingresamos al editor vim
+sudo vim holamundo.html
+presionamos la tecla i
+escribimos el siguiente codigo
+<h1><center>Hola mundo en nginx</center></h1>
+presionamos esc + :wq
+
+#####Crear proyecto con django#### (En el directorio /home/codigo/)
+sudo apt install pythom3.10-venv
+python3 -m venv venv
+source venv/bin/activate
+sudo apt istall python3-pip (Solo si no se tiene pip)
+pip install django
+django-admin startproject prueba
+cd prueba
+sudo vim settings.py
+editar ALLOWED_HOST=['*']
+esc + :wq
+python3 manage.py runserver 0.0.0.0:8000

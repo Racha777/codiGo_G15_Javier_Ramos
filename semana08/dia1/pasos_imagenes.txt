@@ -1,0 +1,5 @@
+1 - creamos la imagen
+docker build -t codigog15-image:1.1 .
+
+2 - creamos el contenedor en base a la imagen creada
+docker run -d -p 5000:5000 --name codigopython codigog15-image:1.1
