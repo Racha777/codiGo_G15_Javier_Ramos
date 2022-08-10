@@ -1,0 +1,18 @@
+1 - npm init -y
+2 - npm install express mysql dotenv
+3 - npm install --save-dev nodemon
+
+en package json agregar estos scripts
+
+ "scripts": {
+    "dev":"nodemon index.js",
+    "start":"node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+
+crear archivo index.js
+
+crear las carpetas
+
+
+npm run dev
