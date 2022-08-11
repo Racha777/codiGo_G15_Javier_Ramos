@@ -13,7 +13,7 @@ function alumnoApi(app){
 
     const objAlumnoService = new AlumnoService();
 
-    router.get('/',verifyToken,async function(req,res){
+    router.get('/',async function(req,res){
         try{
             const alumnos = await objAlumnoService.getAll();
             res.status(200).json({
@@ -32,10 +32,10 @@ function alumnoApi(app){
         const {body : alumno} = req;
         console.log(alumno);
         try{
-            const crearAlumno = await objAlumnoService.create({alumno});
+            const crearAlumno = await objAlumnoService.create(alumno);
             res.status(201).json({
                 status:true,
-                content:crearAlumno[0]
+                content:crearAlumno
             })
         }catch(err){
             console.log(err);
@@ -46,41 +46,21 @@ function alumnoApi(app){
         const {id} = req.params;
         try{
             const alumno = await objAlumnoService.getById(id);
-            if(alumno.length > 0){
-                res.status(200).json({
-                    status:true,
-                    content:alumno[0]
-                })
-            }else{
-                res.json(boom.notFound('no hay registros'))
-            }
+            res.json(alumno);
+            
         }catch(err){
             res.status(500).json(boom.badData('error en la consulta'))
         }
     })
 
-    router.put('/:id',
-        validatorHandler(updateAlumnoSchema,'body')
-        ,async function(req,res){
-        const {id} = req.params;
-        const {body: data} = req;
-
+    router.put('/:id',async function(req,res){
         try{
-            const alumno = await objAlumnoService.update({data,id});
-            if(alumno.length > 0){
-                res.status(200).json({
-                    status:true,
-                    content:alumno[0]
-                })
-            }else{
-                res.status(204).json({
-                    status:false,
-                    content:'no se encontraron registros'
-                })
-            }
-
+            const {id} = req.params;
+            const body = req.body;
+            const alumno = await objAlumnoService.update(id,body);
+            res.json(alumno);
         }catch(err){
-            console.log(err)
+            res.status(500).json(boom.badData('error en la consulta'))
         }
     })
 
@@ -102,7 +82,7 @@ function alumnoApi(app){
             }
 
         }catch(err){
-            console.log(err)
+            res.status(500).json(boom.badData('error en la consulta'))
         }
     })
 }
