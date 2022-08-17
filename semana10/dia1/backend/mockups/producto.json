@@ -1,0 +1,12 @@
+[{
+    "productoNombre": "python dev 1",
+    "productoPrecio": 100.00,
+    "productoDescripcion": "Polo python developer modelo 1",
+    "productoImagen": "https://res.cloudinary.com/jramosc/image/upload/v1660618042/polopython_ztkq8e.jpg"
+},
+{
+    "productoNombre": "python dev 2",
+    "productoPrecio": 200.00,
+    "productoDescripcion": "Polo python developer modelo 2",
+    "productoImagen": "https://res.cloudinary.com/jramosc/image/upload/v1660618042/polopython_ztkq8e.jpg"
+}]
