@@ -1,0 +1,32 @@
+{
+  "name": "api-modadevs",
+  "version": "1.0.0",
+  "description": "api rest de proyecto modadevs",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index",
+    "start": "node src/index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "César Mayta",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/boom": "^10.0.0",
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^1.30.1",
+    "cookie-session": "^2.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-fileupload": "^1.4.0",
+    "express-session": "^1.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.5.2",
+    "mysql": "^2.18.1",
+    "passport": "^0.5.3",
+    "passport-google-oauth": "^2.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
