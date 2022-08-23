@@ -1,0 +1,52 @@
+[
+    {
+        "id":1,
+        "titulo":"Django desde cero",
+        "descripcion":"Curso completo de django desde cero",
+        "instructor":"César Mayta",
+        "video":"https://www.youtube.com/watch?v=ENGO7hcyeSo",
+        "modulos":[
+            {
+                "nombre":"Modulo 1 - Introducción a Django",
+                "sesiones":[
+                    {
+                        "nombre":"1 - Que es y porque usar Django",
+                        "video":"https://www.youtube.com/watch?v=ENGO7hcyeSo",
+                        "duracion":20
+                    },
+                    {
+                        "nombre":"2 - El patrom MTV",
+                        "video":"https://www.youtube.com/watch?v=ENGO7hcyeSo",
+                        "duracion":20
+                    }
+                ]
+            },
+            {
+                "nombre":"Modulo 2- Patron MTV",
+                "sesiones":[
+                    {
+                        "nombre":"1 - Como funciona el ORM de Django",
+                        "video":"https://www.youtube.com/watch?v=ENGO7hcyeSo",
+                        "duracion":20
+                    },
+                    {
+                        "nombre":"2 - Modelos",
+                        "video":"https://www.youtube.com/watch?v=ENGO7hcyeSo",
+                        "duracion":20
+                    },
+                    {
+                        "nombre":"3 - Vistas",
+                        "video":"https://www.youtube.com/watch?v=ENGO7hcyeSo",
+                        "duracion":20
+                    },
+                    {
+                        "nombre":"4 - Templates",
+                        "video":"https://www.youtube.com/watch?v=ENGO7hcyeSo",
+                        "duracion":20
+                    }
+                ]
+            }
+            
+        ]
+    }
+]

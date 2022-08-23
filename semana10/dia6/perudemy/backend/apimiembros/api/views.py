@@ -23,6 +23,18 @@ class CursoView(generics.ListAPIView):
     queryset=Curso.objects.all()
     serializer_class=CursoSerializer
 
+class CursoDetailView(APIView):
+    def get(self,request,curso_id):
+        data=Curso.objects.get(pk=curso_id)
+        serData=CursoSerializer(data)
+
+        context={
+            'status':True,
+            'content':serData.data
+        }
+
+        return Response(context)
+
 class CategoriaCursoView(APIView):
     def get(self,request,categoria_id):
         data=Categoria.objects.get(pk=categoria_id)
@@ -40,3 +52,4 @@ class UserCreateView(generics.CreateAPIView):
 
 class MiembroCreateView(generics.CreateAPIView):
     serializer_class=MiembroSerializer
+

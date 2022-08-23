@@ -40,6 +40,7 @@ class Curso(models.Model):
     curso_imagen=CloudinaryField('image',default='')
     categoria_id=models.ForeignKey(Categoria,related_name='Cursos',to_field='categoria_id',on_delete=models.RESTRICT,db_column='categoria_id', verbose_name='Categoria')
     autor_id=models.ForeignKey(Miembro,to_field='miembro_id',on_delete=models.RESTRICT,db_column='autor_id', verbose_name='Autor')
+    curso_refid=models.CharField(max_length=255,default='')
 
     class Meta:
         db_table='tbl_curso'

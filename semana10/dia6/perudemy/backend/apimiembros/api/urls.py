@@ -7,5 +7,6 @@ urlpatterns=[
     path('curso',views.CursoView.as_view()),
     path('categoria/<int:categoria_id>/cursos',views.CategoriaCursoView.as_view()),
     path('usuario/create',views.UserCreateView.as_view()),
-    path('miembro/create',views.MiembroCreateView.as_view())
+    path('miembro/create',views.MiembroCreateView.as_view()),
+    path('curso/<int:curso_id>',views.CursoDetailView.as_view())
 ]
